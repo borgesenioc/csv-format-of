@@ -61,21 +61,47 @@ function mapJsonToCsv(jsonData) {
     const work = jsonData.work || [];
     const education = jsonData.education || [];
 
-    const csvRow = {
-        full_name: basics.name || "",
-        address: basics.location?.address || "",
-        profile_url: basics.profiles?.[0]?.url || "",
-        organization_1: work[0]?.name || "",
-        organization_title_1: work[0]?.position || "",
-        organization_start_1: work[0]?.startDate || "",
-        organization_end_1: work[0]?.endDate || "",
-        education_1: education[0]?.institution || "",
-        education_degree_1: education[0]?.studyType || "",
-        education_fos_1: education[0]?.area || "",
-        education_start_1: education[0]?.startDate || "",
-        education_end_1: education[0]?.endDate || "",
-        // Map additional fields as needed
-    };
+    // Helper function to sanitize names
+function sanitizeName(name) {
+  if (!name) return "";
+  // Define patterns to remove common prefixes, titles, and suffixes
+  const patternsToRemove = [
+    /\b(dr\.?|phd|sir|mr\.?|ms\.?|mrs\.?|prof\.?|gen\.?|lt\.?|col\.?|maj\.?|sgt\.?|cpt\.?|admiral|commander|capt\.?)\b/gi, // Titles
+    /\b(ret|retired)\b/gi, // Military context
+    /\b(jr\.?|sr\.?|iii|iv|v)\b/gi // Suffixes
+  ];
+  
+  // Remove all patterns from the name
+  let sanitized = name;
+  patternsToRemove.forEach(pattern => {
+    sanitized = sanitized.replace(pattern, "");
+  });
+  
+  // Trim extra spaces and return
+  return sanitized.replace(/\s+/g, " ").trim();
+}
+
+// Extract first and last names from sanitized full name
+function extractFirstName(name) {
+  return name.split(" ")[0] || "";
+}
+
+function extractLastName(name) {
+  const parts = name.split(" ");
+  return parts.slice(1).join(" ") || "";
+}
+
+// Construct the csvRow
+const csvRow = {
+  id: jsonData.basics?.profiles?.[0]?.username || "",
+  public_id: jsonData.basics?.profiles?.[0]?.username || "",
+  profile_url: jsonData.basics?.profiles?.[0]?.url || "",
+  email: jsonData.basics?.email || "",
+  full_name: sanitizeName(jsonData.basics?.name || ""),
+  first_name: extractFirstName(sanitizeName(jsonData.basics?.name || "")),
+  last_name: extractLastName(sanitizeName(jsonData.basics?.name || "")),
+  avatar: jsonData.basics?.image || ""
+};
 
     // Push mapped data in order
     rows.push(columns.map(col => csvRow[col] || "").join(","));
