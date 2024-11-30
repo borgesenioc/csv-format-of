@@ -100,7 +100,19 @@ const csvRow = {
   full_name: sanitizeName(jsonData.basics?.name || ""),
   first_name: extractFirstName(sanitizeName(jsonData.basics?.name || "")),
   last_name: extractLastName(sanitizeName(jsonData.basics?.name || "")),
-  avatar: jsonData.basics?.image || ""
+  avatar: jsonData.basics?.image || "",
+  headline: jsonData.basics?.label || "",
+  location_name: jsonData.basics?.location?.address || "",
+  summary: jsonData.basics?.summary || "",
+  current_company: jsonData.work?.[0]?.name || "",
+  current_company_position: jsonData.work?.[0]?.position || "",
+  current_company_actual_at: jsonData.work?.[0]?.endDate || "",
+  organization_1: jsonData.work?.[0]?.name || "",
+  organization_title_1: jsonData.work?.[0]?.position || "",
+  organization_start_1: jsonData.work?.[0]?.startDate || "",
+  organization_end_1: jsonData.work?.[0]?.endDate || "",
+  organization_location_1: jsonData.work?.[0]?.location || "",
+  position_description_1: jsonData.work?.[0]?.summary || ""
 };
 
     // Push mapped data in order
