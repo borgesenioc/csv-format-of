@@ -80,6 +80,7 @@ const csvRow = {
   headline: jsonData.basics?.label || "",
   location_name: jsonData.basics?.location?.address || "",
   summary: jsonData.basics?.summary || "",
+    
   organization_1: jsonData.work?.[0]?.name || "",
   organization_title_1: jsonData.work?.[0]?.position || "",
   organization_start_1: jsonData.work?.[0]?.startDate || "",
