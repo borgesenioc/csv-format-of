@@ -193,32 +193,4 @@ const csvRow = {
 
     // Return the final CSV string
     return [columns.join(","), ...rows].join("\n");
-}
-
-// Example usage:
-const jsonData = {
-    "basics": {
-        "name": "Orlando Gonzalez",
-        "location": { "address": "United States" },
-        "profiles": [{ "url": "https://www.linkedin.com/in/orlando-gonzalez-03276917/" }]
-    },
-    "work": [
-        {
-            "name": "Resource Management Concepts, Inc.",
-            "position": "Information Assurance Analyst",
-            "startDate": "2023-11-30",
-            "endDate": ""
-        }
-    ],
-    "education": [
-        {
-            "institution": "ITT Technical Institute-San Bernardino",
-            "studyType": "Bachelor's degree",
-            "area": "Information Systems Security",
-            "startDate": "2004-12-31",
-            "endDate": "2007-12-31"
-        }
-    ]
 };
-
-console.log(mapJsonToCsv(jsonData));
