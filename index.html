@@ -1,1 +1,32 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JSON to CSV Converter</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>JSON to CSV Converter</h1>
+  </header>
+  <main>
+    <section class="input-section">
+      <h2>Paste your JSON below:</h2>
+      <textarea id="jsonInput" placeholder="Paste your JSON here..."></textarea>
+    </section>
+    <section class="actions">
+      <button id="convertButton">Convert to CSV</button>
+      <button id="downloadButton" disabled>Download CSV</button>
+    </section>
+    <section class="output-section">
+      <h2>CSV Preview:</h2>
+      <textarea id="csvOutput" placeholder="Your CSV will appear here..." readonly></textarea>
+    </section>
+  </main>
+  <footer>
+    <p>Developed by [Your Name]</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
