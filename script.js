@@ -179,7 +179,27 @@ organization_title_10: jsonData.work?.[9]?.position || "",
 organization_start_10: jsonData.work?.[9]?.startDate || "",
 organization_end_10: jsonData.work?.[9]?.endDate || "",
 organization_location_10: jsonData.work?.[9]?.location || "",
-position_description_10: jsonData.work?.[9]?.summary || ""
+position_description_10: jsonData.work?.[9]?.summary || "",
+
+    education_1: jsonData.education?.[0]?.institution || "",
+    education_degree_1: jsonData.education?.[0]?.studyType || "",
+    education_fos_1: jsonData.education?.[0]?.area || "",
+    education_start_1: jsonData.education?.[0]?.startDate || "",
+    education_end_1: jsonData.education?.[0]?.endDate || "",
+
+    education_2: jsonData.education?.[1]?.institution || "",
+    education_degree_2: jsonData.education?.[1]?.studyType || "",
+    education_fos_2: jsonData.education?.[1]?.area || "",
+    education_start_2: jsonData.education?.[1]?.startDate || "",
+    education_end_2: jsonData.education?.[1]?.endDate || "",
+
+    education_3: jsonData.education?.[2]?.institution || "",
+    education_degree_3: jsonData.education?.[2]?.studyType || "",
+    education_fos_3: jsonData.education?.[2]?.area || "",
+    education_start_3: jsonData.education?.[2]?.startDate || "",
+    education_end_3: jsonData.education?.[2]?.endDate || ""
+    
+    
 };
 
     // Push mapped data in order
