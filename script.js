@@ -61,37 +61,112 @@ function mapJsonToCsv(jsonData) {
         headline: jsonData.basics?.label || "",
         location_name: jsonData.basics?.location?.address || "",
         summary: jsonData.basics?.summary || "",
-        skills: formatSkills(jsonData.skills || [])
+        skills: formatSkills(jsonData.skills || ""),
+
+        // Work Experience (10 positions)
+        organization_1: jsonData.work?.[0]?.name || "",
+        organization_title_1: jsonData.work?.[0]?.position || "",
+        organization_start_1: jsonData.work?.[0]?.startDate || "",
+        organization_end_1: jsonData.work?.[0]?.endDate || "",
+        organization_location_1: jsonData.work?.[0]?.location || "",
+        position_description_1: jsonData.work?.[0]?.summary || "",
+
+        organization_2: jsonData.work?.[1]?.name || "",
+        organization_title_2: jsonData.work?.[1]?.position || "",
+        organization_start_2: jsonData.work?.[1]?.startDate || "",
+        organization_end_2: jsonData.work?.[1]?.endDate || "",
+        organization_location_2: jsonData.work?.[1]?.location || "",
+        position_description_2: jsonData.work?.[1]?.summary || "",
+
+        organization_3: jsonData.work?.[2]?.name || "",
+        organization_title_3: jsonData.work?.[2]?.position || "",
+        organization_start_3: jsonData.work?.[2]?.startDate || "",
+        organization_end_3: jsonData.work?.[2]?.endDate || "",
+        organization_location_3: jsonData.work?.[2]?.location || "",
+        position_description_3: jsonData.work?.[2]?.summary || "",
+
+        organization_4: jsonData.work?.[3]?.name || "",
+        organization_title_4: jsonData.work?.[3]?.position || "",
+        organization_start_4: jsonData.work?.[3]?.startDate || "",
+        organization_end_4: jsonData.work?.[3]?.endDate || "",
+        organization_location_4: jsonData.work?.[3]?.location || "",
+        position_description_4: jsonData.work?.[3]?.summary || "",
+
+        organization_5: jsonData.work?.[4]?.name || "",
+        organization_title_5: jsonData.work?.[4]?.position || "",
+        organization_start_5: jsonData.work?.[4]?.startDate || "",
+        organization_end_5: jsonData.work?.[4]?.endDate || "",
+        organization_location_5: jsonData.work?.[4]?.location || "",
+        position_description_5: jsonData.work?.[4]?.summary || "",
+
+        organization_6: jsonData.work?.[5]?.name || "",
+        organization_title_6: jsonData.work?.[5]?.position || "",
+        organization_start_6: jsonData.work?.[5]?.startDate || "",
+        organization_end_6: jsonData.work?.[5]?.endDate || "",
+        organization_location_6: jsonData.work?.[5]?.location || "",
+        position_description_6: jsonData.work?.[5]?.summary || "",
+
+        organization_7: jsonData.work?.[6]?.name || "",
+        organization_title_7: jsonData.work?.[6]?.position || "",
+        organization_start_7: jsonData.work?.[6]?.startDate || "",
+        organization_end_7: jsonData.work?.[6]?.endDate || "",
+        organization_location_7: jsonData.work?.[6]?.location || "",
+        position_description_7: jsonData.work?.[6]?.summary || "",
+
+        organization_8: jsonData.work?.[7]?.name || "",
+        organization_title_8: jsonData.work?.[7]?.position || "",
+        organization_start_8: jsonData.work?.[7]?.startDate || "",
+        organization_end_8: jsonData.work?.[7]?.endDate || "",
+        organization_location_8: jsonData.work?.[7]?.location || "",
+        position_description_8: jsonData.work?.[7]?.summary || "",
+
+        organization_9: jsonData.work?.[8]?.name || "",
+        organization_title_9: jsonData.work?.[8]?.position || "",
+        organization_start_9: jsonData.work?.[8]?.startDate || "",
+        organization_end_9: jsonData.work?.[8]?.endDate || "",
+        organization_location_9: jsonData.work?.[8]?.location || "",
+        position_description_9: jsonData.work?.[8]?.summary || "",
+
+        organization_10: jsonData.work?.[9]?.name || "",
+        organization_title_10: jsonData.work?.[9]?.position || "",
+        organization_start_10: jsonData.work?.[9]?.startDate || "",
+        organization_end_10: jsonData.work?.[9]?.endDate || "",
+        organization_location_10: jsonData.work?.[9]?.location || "",
+        position_description_10: jsonData.work?.[9]?.summary || "",
+
+        // Education (3 entries)
+        education_1: jsonData.education?.[0]?.institution || "",
+        education_degree_1: jsonData.education?.[0]?.studyType || "",
+        education_fos_1: jsonData.education?.[0]?.area || "",
+        education_start_1: jsonData.education?.[0]?.startDate || "",
+        education_end_1: jsonData.education?.[0]?.endDate || "",
+
+        education_2: jsonData.education?.[1]?.institution || "",
+        education_degree_2: jsonData.education?.[1]?.studyType || "",
+        education_fos_2: jsonData.education?.[1]?.area || "",
+        education_start_2: jsonData.education?.[1]?.startDate || "",
+        education_end_2: jsonData.education?.[1]?.endDate || "",
+
+        education_3: jsonData.education?.[2]?.institution || "",
+        education_degree_3: jsonData.education?.[2]?.studyType || "",
+        education_fos_3: jsonData.education?.[2]?.area || "",
+        education_start_3: jsonData.education?.[2]?.startDate || "",
+        education_end_3: jsonData.education?.[2]?.endDate || "",
+
+        // Languages (3 entries)
+        language_1: jsonData.languages?.[0]?.language || "",
+        language_proficiency_1: jsonData.languages?.[0]?.fluency || "",
+        language_2: jsonData.languages?.[1]?.language || "",
+        language_proficiency_2: jsonData.languages?.[1]?.fluency || "",
+        language_3: jsonData.languages?.[2]?.language || "",
+        language_proficiency_3: jsonData.languages?.[2]?.fluency || ""
     };
-
-    // Add work and education mappings dynamically
-    for (let i = 0; i < 10; i++) {
-        csvRow[`organization_${i + 1}`] = jsonData.work?.[i]?.name || "";
-        csvRow[`organization_title_${i + 1}`] = jsonData.work?.[i]?.position || "";
-        csvRow[`organization_start_${i + 1}`] = jsonData.work?.[i]?.startDate || "";
-        csvRow[`organization_end_${i + 1}`] = jsonData.work?.[i]?.endDate || "";
-        csvRow[`organization_location_${i + 1}`] = jsonData.work?.[i]?.location || "";
-        csvRow[`position_description_${i + 1}`] = jsonData.work?.[i]?.summary || "";
-    }
-
-    for (let i = 0; i < 3; i++) {
-        csvRow[`education_${i + 1}`] = jsonData.education?.[i]?.institution || "";
-        csvRow[`education_degree_${i + 1}`] = jsonData.education?.[i]?.studyType || "";
-        csvRow[`education_fos_${i + 1}`] = jsonData.education?.[i]?.area || "";
-        csvRow[`education_start_${i + 1}`] = jsonData.education?.[i]?.startDate || "";
-        csvRow[`education_end_${i + 1}`] = jsonData.education?.[i]?.endDate || "";
-    }
-
-    for (let i = 0; i < 3; i++) {
-        csvRow[`language_${i + 1}`] = jsonData.languages?.[i]?.language || "";
-        csvRow[`language_proficiency_${i + 1}`] = jsonData.languages?.[i]?.fluency || "";
-    }
 
     rows.push(columns.map(col => csvRow[col] || "").join(","));
     return [columns.join(","), ...rows].join("\n");
 }
 
-// Add event listeners
+// Add event listeners for interaction
 document.addEventListener("DOMContentLoaded", () => {
     const convertButton = document.getElementById("convertButton");
     const downloadButton = document.getElementById("downloadButton");
