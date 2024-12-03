@@ -1,3 +1,4 @@
+// Function to map JSON to CSV
 function mapJsonToCsv(jsonData) {
     const columns = [
         "id", "public_id", "profile_url", "email", "full_name", "first_name", "last_name", "avatar", "headline", "location_name", "summary",
@@ -88,4 +89,32 @@ function mapJsonToCsv(jsonData) {
 
     rows.push(columns.map(col => csvRow[col] || "").join(","));
     return [columns.join(","), ...rows].join("\n");
-};
+}
+
+// Add event listeners
+document.addEventListener("DOMContentLoaded", () => {
+    const convertButton = document.getElementById("convertButton");
+    const downloadButton = document.getElementById("downloadButton");
+    const jsonInput = document.getElementById("jsonInput");
+    const csvOutput = document.getElementById("csvOutput");
+
+    convertButton.addEventListener("click", () => {
+        try {
+            const jsonData = JSON.parse(jsonInput.value);
+            const csvData = mapJsonToCsv(jsonData);
+            csvOutput.value = csvData;
+            downloadButton.disabled = false;
+        } catch (error) {
+            alert("Invalid JSON. Please check your input.");
+            console.error(error);
+        }
+    });
+
+    downloadButton.addEventListener("click", () => {
+        const blob = new Blob([csvOutput.value], { type: "text/csv" });
+        const downloadLink = document.createElement("a");
+        downloadLink.href = URL.createObjectURL(blob);
+        downloadLink.download = "output.csv";
+        downloadLink.click();
+    });
+});
