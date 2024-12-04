@@ -1,0 +1,596 @@
+{
+    "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+    "basics": {
+      "name": "Orlando Gonzalez",
+      "label": "Information Assurance Analyst",
+      "image": "",
+      "email": "",
+      "phone": "",
+      "url": "",
+      "summary": "Experienced Information System Security Officer with a demonstrated history of working in the information technology and services industry. Skilled in the RMF Process, Information Assurance, and Information Security. Strong information technology professional with a Bachelor's degree focused in Information Systems Security.  Currently hold a Top Secret Clearance.",
+      "location": {
+        "countryCode": "US",
+        "address": "United States"
+      },
+      "profiles": [
+        {
+          "network": "LinkedIn",
+          "username": "orlando-gonzalez-03276917",
+          "url": "https://www.linkedin.com/in/orlando-gonzalez-03276917/"
+        }
+      ]
+    },
+    "work": [
+      {
+        "name": "Resource Management Concepts, Inc.",
+        "position": "Information Assurance Analyst",
+        "startDate": "2023-11-30",
+        "endDate": "",
+        "highlights": [],
+        "summary": "Perform duties as a Navy Qualified Validator.\nWork in a team environment using the tools, processes and workflows of the Risk Management Framework and conduct Assessments and obtain Authorizations (RMF A&A)\nPerform SCAP & ACAS scans and analyze results for needed remediation and reporting.\nUse eMASS to record results while implementing RMF steps 1-6\nUtilize eMASSTER and RAFT for the RMF process.\nPerform quarterly delta and full annual STIG reviews in collaboration with system administrators.\nSupport IA requirements in a Windows 10 and Red Hat Enterprise Linux environment.\nPerform centralized antivirus, system patching, configuration management, vulnerability scanning, and mitigation to meet security compliance requirements. \nProvide regular reporting on system(s) health.",
+        "url": "https://www.linkedin.com/company/resource-management-concepts-inc-/",
+        "location": "San Diego, California, United States"
+      },
+      {
+        "name": "Leidos",
+        "position": "Cyber Security Specialist Senior",
+        "startDate": "2023-08-31",
+        "endDate": "2023-11-30",
+        "highlights": [],
+        "summary": "Scanned network and computers using ACAS.\nRan STIGS on computers and other networking devices.\nPatched computers that were non compliant.",
+        "url": "https://www.linkedin.com/company/leidos/",
+        "location": "Camp Pendleton South, California, United States"
+      },
+      {
+        "name": "VSolvit",
+        "position": "Network Engineer 2 (Cybersecurity)",
+        "startDate": "2022-03-31",
+        "endDate": "2023-08-31",
+        "highlights": [],
+        "summary": "• Perform duties as the command Information Systems Security Officer (ISSO).\n• Create POAMs in support of the RMF Process.\n• Conduct risk and vulnerability assessment at the network, system and application level using ACAS.\n• Perform Security Technical Implementation Guide (STIG) checks on all devices and generate checklists using SCAP Compliance Checker and STIG Viewer.\n• Remediation of computers.\n• Prepared necessary documentation for upload to MCCAST in support of the RMF ATO package process.",
+        "url": "https://www.linkedin.com/company/vsolvit/",
+        "location": "Camp Pendleton North, California, United States"
+      },
+      {
+        "name": "Deloitte",
+        "position": "Cyber Security Engineer",
+        "startDate": "2021-07-31",
+        "endDate": "2022-02-28",
+        "highlights": [],
+        "summary": "•\tConduct risk and vulnerability assessment at the network, system and application level using ACAS. \n•\tWork with DOD cyber tools including ACAS, SCAP compliance checker and STIG viewer. \n•\tEntered and updated information into eMASS as part of the RMF process.",
+        "url": "https://www.linkedin.com/company/deloitte/",
+        "location": "San Diego, California, United States"
+      },
+      {
+        "name": "Sentek Global",
+        "position": "Cyber Security Engineer",
+        "startDate": "2020-01-31",
+        "endDate": "2021-07-31",
+        "highlights": [],
+        "summary": "•\tConduct risk and vulnerability assessment at the network, system and application level using ACAS. \n•\tWork with DOD cyber tools including ACAS, SCAP compliance checker and STIG viewer. \n•\tEntered and updated information into eMASS as part of the RMF process.",
+        "url": "https://www.linkedin.com/company/sentek-global/",
+        "location": "Greater San Diego Area"
+      },
+      {
+        "name": "Vectrus",
+        "position": "Information Assurance Analyst",
+        "startDate": "2018-08-31",
+        "endDate": "2019-12-31",
+        "highlights": [],
+        "summary": "•\tConducts risk and vulnerability assessment at the network, system and application level using ACAS. \r\n•\tWork with DOD cyber tools involving ACAS, Security Center and Nessus.\r\n•\tSuccessfully attained an ATO for our network (NIPR / SIPR) through the RMF processes. \r\n•\tInvestigate and report on “IA incidents” such as spillage and network violations.\r\n•\tGenerate detailed vulnerability reports used by Senior Management to evaluate the overall Cyber Security status and Systems Administration to apply patches and solutions.\r\n•\tUpdate and create POA&M in eMASS.\r\n•\tPerform monthly Security Technical Implementation Guide (STIG) checks on all devices and generate checklists using ACAS, SCAP Compliance Checker and STIG Viewer.\r\n•\tProcess User Account Requests (SAAR-Ns).\r\n•\tCreate Remedy tickets based on scan results.\r\n•\tTrack, verify, and update users IA training compliance through the Army Training and Certification Tracking System (ATCTS).",
+        "url": "https://www.linkedin.com/company/vectrus/",
+        "location": "Al Asad Airbase, Iraq"
+      },
+      {
+        "name": "CSRA Inc",
+        "position": "Information Systems Security Officer",
+        "startDate": "2017-03-31",
+        "endDate": "2018-08-31",
+        "highlights": [],
+        "summary": "•\tConducts risk and vulnerability assessment at the network, system and application level using ACAS. \n•\tWork with DOD cyber tools involving ACAS, Security Center and Nessus.\n•\tUpdate IAVM status within VRAM.\n•\tGenerate detailed vulnerability reports used by Senior Management to evaluate the overall Cyber Security status and Systems Administration to apply patches and solutions.\n•\tConducts information security risk assessments and effectively communicates risk to program manager and client.\n•\tInteracts with various departments and individuals across the enterprise to achieve information security objectives.\n•\tPerform monthly Security Technical Implementation Guide (STIG) checks on all devices and generate checklists using ACAS, SCAP Compliance Checker and STIG Viewer.\n•\tUpdate RMF Framework as needed.\n•\tProcess User Account Requests (SAAR-Ns).\n•\tCreate Remedy tickets based on scan results.",
+        "url": "https://www.linkedin.com/company/csra_inc/",
+        "location": "San Diego, ca "
+      },
+      {
+        "name": "Apex Systems",
+        "position": "Information Systems Security Engineer",
+        "startDate": "2016-07-31",
+        "endDate": "2017-03-31",
+        "highlights": [],
+        "summary": "•\tAssist systems engineers in meeting DISA established security profiles as well as customer determined Information Assurance objectives. Edit engineering documentation prior to submission for review by the customers IA review board. Assist the Domain Architect in presenting engineering designs and plans to the customers IA review board.\n•\tCreate original DIACAP submissions for new systems and incorporate updates to pre-existing systems. Collect and review related information security artifacts (certifications, test results, configuration documentation) for C&A review.\n•\tCoordinate the timely testing and reporting of test results for various hardware and software solutions and systems. Perform actual tests and reviews as required to include ACAS and Retina vulnerability scans, SCAP Benchmark tests and manual STIG reviews.\n•\tRemediate or mitigate all outstanding vulnerabilities in accordance with DISA guidance to include changing device security profiles and settings, updating GPO’s and patching systems. Report and reconcile False Positives from testing and request exception acceptance from the DAA.\n•\tFunction as the liaison in person, in writing and over the phone to Vendor representatives and to customer IA Validators as well as Certification Authorities addressing the IA posture of various packages and systems.",
+        "url": "https://www.linkedin.com/company/apex-systems/",
+        "location": "San Diego"
+      },
+      {
+        "name": "DataPath, Inc.",
+        "position": "Sr. Systems Security Engineer",
+        "startDate": "2015-11-30",
+        "endDate": "2016-07-31",
+        "highlights": [],
+        "summary": "Maintain security posture of systems onboard MCTSSA (Marine Corp Tactical Systems Support Activity) Camp Pendleton.\nAssist with C & A efforts of systems\nCoordinate with Engineers, ISSM's, IAM, and vendors regarding their respective systems.\nImplement DOD STIGs on systems using STIG Viewer.\nScan systems using ACAS and apply missing IAVA.\nProvide information assurance vulnerability compliance, mitigation, and documentation IAW Information Assurance Vulnerability Management (IAVM) process.\nDoD Cyber Tools - ACAS/Security Center/Nessus.\nPerformed Anti-Virus Scans and updates",
+        "url": "https://www.linkedin.com/company/datapath-inc-/",
+        "location": "Camp Pendleton, CA"
+      },
+      {
+        "name": "General Dynamics Information Technology",
+        "position": "Information Assurance Engineer",
+        "startDate": "2015-06-30",
+        "endDate": "2015-10-31",
+        "highlights": [],
+        "summary": "Support SPAWAR System Center Pacific. Responsible for testing, support and security of US Navy Meteorological & Oceanographic (METOC) C4I systems.\nMaintain virus / security requirements by the US Navy\nApply missing IAVA patches to network clients and servers using approved IA tools\nProvide information assurance vulnerability compliance, mitigation, and documentation IAW Information Assurance Vulnerability Management (IAVM) process.",
+        "url": "https://www.linkedin.com/company/gdit/"
+      },
+      {
+        "name": "Resource Management Concepts, Inc.",
+        "position": "Information Assurance Analyst",
+        "startDate": "2023-11-30",
+        "endDate": "",
+        "highlights": [],
+        "summary": "Perform duties as a Navy Qualified Validator.\nWork in a team environment using the tools, processes and workflows of the Risk Management Framework and conduct Assessments and obtain Authorizations (RMF A&A)\nPerform SCAP & ACAS scans and analyze results for needed remediation and reporting.\nUse eMASS to record results while implementing RMF steps 1-6\nUtilize eMASSTER and RAFT for the RMF process.\nPerform quarterly delta and full annual STIG reviews in collaboration with system administrators.\nSupport IA requirements in a Windows 10 and Red Hat Enterprise Linux environment.\nPerform centralized antivirus, system patching, configuration management, vulnerability scanning, and mitigation to meet security compliance requirements. \nProvide regular reporting on system(s) health.",
+        "url": "https://www.linkedin.com/company/resource-management-concepts-inc-/",
+        "location": "San Diego, California, United States"
+      },
+      {
+        "name": "Leidos",
+        "position": "Cyber Security Specialist Senior",
+        "startDate": "2023-08-31",
+        "endDate": "2023-11-30",
+        "highlights": [],
+        "summary": "Scanned network and computers using ACAS.\nRan STIGS on computers and other networking devices.\nPatched computers that were non compliant.",
+        "url": "https://www.linkedin.com/company/leidos/",
+        "location": "Camp Pendleton South, California, United States"
+      },
+      {
+        "name": "VSolvit",
+        "position": "Network Engineer 2 (Cybersecurity)",
+        "startDate": "2022-03-31",
+        "endDate": "2023-08-31",
+        "highlights": [],
+        "summary": "• Perform duties as the command Information Systems Security Officer (ISSO).\n• Create POAMs in support of the RMF Process.\n• Conduct risk and vulnerability assessment at the network, system and application level using ACAS.\n• Perform Security Technical Implementation Guide (STIG) checks on all devices and generate checklists using SCAP Compliance Checker and STIG Viewer.\n• Remediation of computers.\n• Prepared necessary documentation for upload to MCCAST in support of the RMF ATO package process.",
+        "url": "https://www.linkedin.com/company/vsolvit/",
+        "location": "Camp Pendleton North, California, United States"
+      },
+      {
+        "name": "Deloitte",
+        "position": "Cyber Security Engineer",
+        "startDate": "2021-07-31",
+        "endDate": "2022-02-28",
+        "highlights": [],
+        "summary": "•\tConduct risk and vulnerability assessment at the network, system and application level using ACAS. \n•\tWork with DOD cyber tools including ACAS, SCAP compliance checker and STIG viewer. \n•\tEntered and updated information into eMASS as part of the RMF process.",
+        "url": "https://www.linkedin.com/company/deloitte/",
+        "location": "San Diego, California, United States"
+      },
+      {
+        "name": "Sentek Global",
+        "position": "Cyber Security Engineer",
+        "startDate": "2020-01-31",
+        "endDate": "2021-07-31",
+        "highlights": [],
+        "summary": "•\tConduct risk and vulnerability assessment at the network, system and application level using ACAS. \n•\tWork with DOD cyber tools including ACAS, SCAP compliance checker and STIG viewer. \n•\tEntered and updated information into eMASS as part of the RMF process.",
+        "url": "https://www.linkedin.com/company/sentek-global/",
+        "location": "Greater San Diego Area"
+      },
+      {
+        "name": "Vectrus",
+        "position": "Information Assurance Analyst",
+        "startDate": "2018-08-31",
+        "endDate": "2019-12-31",
+        "highlights": [],
+        "summary": "•\tConducts risk and vulnerability assessment at the network, system and application level using ACAS. \r\n•\tWork with DOD cyber tools involving ACAS, Security Center and Nessus.\r\n•\tSuccessfully attained an ATO for our network (NIPR / SIPR) through the RMF processes. \r\n•\tInvestigate and report on “IA incidents” such as spillage and network violations.\r\n•\tGenerate detailed vulnerability reports used by Senior Management to evaluate the overall Cyber Security status and Systems Administration to apply patches and solutions.\r\n•\tUpdate and create POA&M in eMASS.\r\n•\tPerform monthly Security Technical Implementation Guide (STIG) checks on all devices and generate checklists using ACAS, SCAP Compliance Checker and STIG Viewer.\r\n•\tProcess User Account Requests (SAAR-Ns).\r\n•\tCreate Remedy tickets based on scan results.\r\n•\tTrack, verify, and update users IA training compliance through the Army Training and Certification Tracking System (ATCTS).",
+        "url": "https://www.linkedin.com/company/vectrus/",
+        "location": "Al Asad Airbase, Iraq"
+      },
+      {
+        "name": "CSRA Inc",
+        "position": "Information Systems Security Officer",
+        "startDate": "2017-03-31",
+        "endDate": "2018-08-31",
+        "highlights": [],
+        "summary": "•\tConducts risk and vulnerability assessment at the network, system and application level using ACAS. \n•\tWork with DOD cyber tools involving ACAS, Security Center and Nessus.\n•\tUpdate IAVM status within VRAM.\n•\tGenerate detailed vulnerability reports used by Senior Management to evaluate the overall Cyber Security status and Systems Administration to apply patches and solutions.\n•\tConducts information security risk assessments and effectively communicates risk to program manager and client.\n•\tInteracts with various departments and individuals across the enterprise to achieve information security objectives.\n•\tPerform monthly Security Technical Implementation Guide (STIG) checks on all devices and generate checklists using ACAS, SCAP Compliance Checker and STIG Viewer.\n•\tUpdate RMF Framework as needed.\n•\tProcess User Account Requests (SAAR-Ns).\n•\tCreate Remedy tickets based on scan results.",
+        "url": "https://www.linkedin.com/company/csra_inc/",
+        "location": "San Diego, ca "
+      },
+      {
+        "name": "Apex Systems",
+        "position": "Information Systems Security Engineer",
+        "startDate": "2016-07-31",
+        "endDate": "2017-03-31",
+        "highlights": [],
+        "summary": "•\tAssist systems engineers in meeting DISA established security profiles as well as customer determined Information Assurance objectives. Edit engineering documentation prior to submission for review by the customers IA review board. Assist the Domain Architect in presenting engineering designs and plans to the customers IA review board.\n•\tCreate original DIACAP submissions for new systems and incorporate updates to pre-existing systems. Collect and review related information security artifacts (certifications, test results, configuration documentation) for C&A review.\n•\tCoordinate the timely testing and reporting of test results for various hardware and software solutions and systems. Perform actual tests and reviews as required to include ACAS and Retina vulnerability scans, SCAP Benchmark tests and manual STIG reviews.\n•\tRemediate or mitigate all outstanding vulnerabilities in accordance with DISA guidance to include changing device security profiles and settings, updating GPO’s and patching systems. Report and reconcile False Positives from testing and request exception acceptance from the DAA.\n•\tFunction as the liaison in person, in writing and over the phone to Vendor representatives and to customer IA Validators as well as Certification Authorities addressing the IA posture of various packages and systems.",
+        "url": "https://www.linkedin.com/company/apex-systems/",
+        "location": "San Diego"
+      },
+      {
+        "name": "DataPath, Inc.",
+        "position": "Sr. Systems Security Engineer",
+        "startDate": "2015-11-30",
+        "endDate": "2016-07-31",
+        "highlights": [],
+        "summary": "Maintain security posture of systems onboard MCTSSA (Marine Corp Tactical Systems Support Activity) Camp Pendleton.\nAssist with C & A efforts of systems\nCoordinate with Engineers, ISSM's, IAM, and vendors regarding their respective systems.\nImplement DOD STIGs on systems using STIG Viewer.\nScan systems using ACAS and apply missing IAVA.\nProvide information assurance vulnerability compliance, mitigation, and documentation IAW Information Assurance Vulnerability Management (IAVM) process.\nDoD Cyber Tools - ACAS/Security Center/Nessus.\nPerformed Anti-Virus Scans and updates",
+        "url": "https://www.linkedin.com/company/datapath-inc-/",
+        "location": "Camp Pendleton, CA"
+      },
+      {
+        "name": "General Dynamics Information Technology",
+        "position": "Information Assurance Engineer",
+        "startDate": "2015-06-30",
+        "endDate": "2015-10-31",
+        "highlights": [],
+        "summary": "Support SPAWAR System Center Pacific. Responsible for testing, support and security of US Navy Meteorological & Oceanographic (METOC) C4I systems.\nMaintain virus / security requirements by the US Navy\nApply missing IAVA patches to network clients and servers using approved IA tools\nProvide information assurance vulnerability compliance, mitigation, and documentation IAW Information Assurance Vulnerability Management (IAVM) process.",
+        "url": "https://www.linkedin.com/company/gdit/"
+      }
+    ],
+    "volunteer": [],
+    "education": [
+      {
+        "institution": "ITT Technical Institute-San Bernardino",
+        "area": "Information Systems Security",
+        "studyType": "Bachelor's degree",
+        "startDate": "2004-12-31",
+        "endDate": "2007-12-31",
+        "score": "",
+        "courses": []
+      },
+      {
+        "institution": "ITT Technical Institute-San Bernardino",
+        "area": "Information Technology",
+        "studyType": "Associate of Science (AS)",
+        "startDate": "2001-12-31",
+        "endDate": "2004-12-31",
+        "score": "",
+        "courses": []
+      },
+      {
+        "institution": "ITT Technical Institute-San Bernardino",
+        "area": "Information Systems Security",
+        "studyType": "Bachelor's degree",
+        "startDate": "2004-12-31",
+        "endDate": "2007-12-31",
+        "score": "",
+        "courses": []
+      },
+      {
+        "institution": "ITT Technical Institute-San Bernardino",
+        "area": "Information Technology",
+        "studyType": "Associate of Science (AS)",
+        "startDate": "2001-12-31",
+        "endDate": "2004-12-31",
+        "score": "",
+        "courses": []
+      },
+      {
+        "institution": "ITT Technical Institute-San Bernardino",
+        "area": "Information Systems Security",
+        "studyType": "Bachelor's degree",
+        "startDate": "2004-12-31",
+        "endDate": "2007-12-31",
+        "score": "",
+        "courses": []
+      },
+      {
+        "institution": "ITT Technical Institute-San Bernardino",
+        "area": "Information Technology",
+        "studyType": "Associate of Science (AS)",
+        "startDate": "2001-12-31",
+        "endDate": "2004-12-31",
+        "score": "",
+        "courses": []
+      }
+    ],
+    "awards": [],
+    "certificates": [
+      {
+        "name": "MCTS Windows 7",
+        "issuer": "Microsoft"
+      },
+      {
+        "name": "Microsoft Certified Professional (MCP)",
+        "issuer": "Microsoft"
+      },
+      {
+        "name": "CompTIA A+",
+        "issuer": "CompTIA",
+        "endDate": "2022-08-31",
+        "startDate": "2007-05-31"
+      },
+      {
+        "name": "CompTIA Security+",
+        "issuer": "CompTIA"
+      },
+      {
+        "name": "CompTIA Cybersecurity Analyst (CySA+)",
+        "issuer": "CompTIA",
+        "endDate": "2022-08-31",
+        "startDate": "2019-08-31"
+      },
+      {
+        "name": "CompTIA Advanced Security Practitioner (CASP)",
+        "issuer": "CompTIA",
+        "endDate": "2022-08-31",
+        "startDate": "2019-08-31"
+      },
+      {
+        "name": "IT Information Library Foundations Certification (ITIL)",
+        "issuer": "PeopleCert",
+        "startDate": "2018-12-31"
+      },
+      {
+        "name": "ACAS",
+        "issuer": "DISA",
+        "startDate": "2018-09-30"
+      },
+      {
+        "name": "Microsoft Certified Solutions Associate: Windows Server 2016",
+        "issuer": "Microsoft",
+        "startDate": "2019-08-31"
+      },
+      {
+        "name": "Juniper Networks Certified Associate - Junos (JNCIA-Junos)",
+        "issuer": "Juniper Networks",
+        "endDate": "2026-04-30",
+        "startDate": "2023-04-30"
+      }
+    ],
+    "publications": [],
+    "skills": [
+      {
+        "name": "IT Compliance",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Cyber Security Risk",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Risk Management",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Security Controls",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Vectrus",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Vulnerability Management",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Government Contracting",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Security Clearance",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "DHCP",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Microsoft Certified Professional",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Security",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "U.S. Department of Defense",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Information Security Awareness",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Cybersecurity",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "SCCM",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "VMware",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Software Installation",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "DNS",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Active Directory",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Mission Assurance",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Windows XP",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Help Desk Support",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Networking",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Backup Exec",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Continuous Monitoring",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Security+",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Firewalls",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Windows 7",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Information Assurance",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Windows Server",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Network Security",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Computer Security",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "XP",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "DoD",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Troubleshooting",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "VMware ESX",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Configuration Management",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "BMC Remedy",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "System Administration",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "System Deployment",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Network Administration",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "VPN",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Information Security",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Microsoft Exchange",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Group Policy",
+        "level": "",
+        "keywords": []
+      },
+      {
+        "name": "Servers",
+        "level": "",
+        "keywords": []
+      }
+    ],
+    "languages": [
+      {
+        "language": "English",
+        "fluency": "Native Speaker"
+      },
+      {
+        "language": "English",
+        "fluency": "Native Speaker"
+      },
+      {
+        "language": "English",
+        "fluency": "Native Speaker"
+      },
+      {
+        "language": "English",
+        "fluency": "Native Speaker"
+      },
+      {
+        "language": "English",
+        "fluency": "Native Speaker"
+      }
+    ],
+    "interests": [],
+    "references": [],
+    "projects": [],
+    "meta": {
+      "version": "v1.0.0",
+      "canonical": "https://github.com/jsonresume/resume-schema/blob/v1.0.0/schema.json"
+    }
+  }
