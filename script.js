@@ -47,7 +47,9 @@ function mapJsonToCsv(jsonData) {
     csvRow.avatar = jsonData.basics?.image || "";
     csvRow.headline = jsonData.basics?.label || "";
     csvRow.location_name = jsonData.basics?.location?.address || "";
-    csvRow.summary = (jsonData.work || []).map(work => work.summary || "").join(", ");
+
+    // Summary (simplified to extract only the primary summary)
+    csvRow.summary = jsonData.basics?.summary || "";
 
     // Organizations
     (jsonData.work || []).forEach((work, index) => {
@@ -108,16 +110,41 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     downloadButton.addEventListener("click", () => {
-        const blob = new Blob([csvOutput.value], { type: "text/csv" });
-        const downloadLink = document.createElement("a");
-        const currentDate = new Date()
-            .toISOString()
-            .slice(0, 10)
-            .replace(/-/g, "");
-        const fileName =
-            csvOutput.value.split(",")[16]?.trim() || "output"; // Use full_name or default
-        downloadLink.href = URL.createObjectURL(blob);
-        downloadLink.download = `${fileName}_${currentDate}.csv`;
-        downloadLink.click();
+        try {
+            // Prepare CSV data for download
+            const blob = new Blob([csvOutput.value], { type: "text/csv" });
+            const downloadLink = document.createElement("a");
+    
+            // Parse CSV to get headers and first row of data
+            const csvData = csvOutput.value.split("\n");
+            const headers = csvData[0]?.split(",") || [];
+            const values = csvData[1]?.split(",") || [];
+    
+            // Get indices for `first_name` and `last_name`
+            const firstNameIndex = headers.indexOf("first_name");
+            const lastNameIndex = headers.indexOf("last_name");
+    
+            // Retrieve `first_name` and `last_name` values, convert to lowercase, and replace spaces with underscores
+            const firstName = values[firstNameIndex]?.replace(/"/g, "").trim().toLowerCase().replace(/\s+/g, "_") || "unknown";
+            const lastName = values[lastNameIndex]?.replace(/"/g, "").trim().toLowerCase().replace(/\s+/g, "_") || "user";
+    
+            // Get today's date in `yyyy_mm_dd` format
+            const currentDate = new Date().toISOString().split("T")[0].replace(/-/g, "_");
+    
+            // Create dynamic file name
+            const fileName = `${firstName}_${lastName}_${currentDate}.csv`;
+    
+            // Set up download link
+            downloadLink.href = URL.createObjectURL(blob);
+            downloadLink.download = fileName;
+    
+            // Programmatically trigger download
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        } catch (error) {
+            console.error("Error generating the file name:", error);
+            alert("Failed to generate the file name. Please try again.");
+        }
     });
 });
