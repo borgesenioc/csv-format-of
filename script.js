@@ -95,13 +95,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const convertButton = document.getElementById("convertButton");
     const downloadButton = document.getElementById("downloadButton");
     const jsonInput = document.getElementById("jsonInput");
-    const csvOutput = document.getElementById("csvOutput");
 
     convertButton.addEventListener("click", () => {
         try {
             const jsonData = JSON.parse(jsonInput.value);
             const csvData = mapJsonToCsv(jsonData);
-            csvOutput.value = csvData;
+
+            // Update status badge
+            const statusBadge = document.getElementById("statusBadge");
+            statusBadge.textContent = "CSV successfully created!";
+            statusBadge.classList.add("success");
+
+            downloadButton.dataset.csv = csvData; // Temporary storage for download
             downloadButton.disabled = false;
         } catch (error) {
             alert("Invalid JSON. Please check your input.");
@@ -111,34 +116,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
     downloadButton.addEventListener("click", () => {
         try {
-            // Prepare CSV data for download
-            const blob = new Blob([csvOutput.value], { type: "text/csv" });
+            const csvData = downloadButton.dataset.csv; // Retrieve stored CSV data
+            const blob = new Blob([csvData], { type: "text/csv" });
             const downloadLink = document.createElement("a");
-    
-            // Parse CSV to get headers and first row of data
-            const csvData = csvOutput.value.split("\n");
-            const headers = csvData[0]?.split(",") || [];
-            const values = csvData[1]?.split(",") || [];
-    
-            // Get indices for `first_name` and `last_name`
-            const firstNameIndex = headers.indexOf("first_name");
-            const lastNameIndex = headers.indexOf("last_name");
-    
-            // Retrieve `first_name` and `last_name` values, convert to lowercase, and replace spaces with underscores
-            const firstName = values[firstNameIndex]?.replace(/"/g, "").trim().toLowerCase().replace(/\s+/g, "_") || "unknown";
-            const lastName = values[lastNameIndex]?.replace(/"/g, "").trim().toLowerCase().replace(/\s+/g, "_") || "user";
-    
-            // Get today's date in `yyyy_mm_dd` format
+
+            // Generate file name
+            const jsonData = JSON.parse(jsonInput.value);
+            const firstName = jsonData.basics?.name?.split(" ")[0]?.toLowerCase() || "unknown";
+            const lastName = jsonData.basics?.name?.split(" ").slice(1).join("_").toLowerCase() || "user";
             const currentDate = new Date().toISOString().split("T")[0].replace(/-/g, "_");
-    
-            // Create dynamic file name
             const fileName = `${firstName}_${lastName}_${currentDate}.csv`;
-    
-            // Set up download link
+
             downloadLink.href = URL.createObjectURL(blob);
             downloadLink.download = fileName;
-    
-            // Programmatically trigger download
             document.body.appendChild(downloadLink);
             downloadLink.click();
             document.body.removeChild(downloadLink);
