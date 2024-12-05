@@ -1,10 +1,29 @@
-// Helper function to escape fields for CSV
-function escapeCsvField(field) {
-    if (!field) return "";
-    return `"${field.replace(/"/g, '""')}"`; // Escape double quotes and wrap in quotes
+function formatDateString(dateString) {
+    if (!dateString) return ""; // Return an empty string if dateString is falsy
+    const date = new Date(dateString);
+    if (isNaN(date)) return dateString; // If the date is invalid, return the original string
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
 }
 
-// Function to map JSON to CSV
+// Helper function to escape fields for CSV
+function escapeCsvField(field) {
+    if (!field) return ""; // Return an empty string if the field is undefined or null
+    return `"${String(field).replace(/"/g, '""')}"`; // Escape double quotes and wrap in quotes
+}
+
+// Generate a 4-digit code for organization IDs
+function generateFourDigitCode(index) {
+    return String(1000 + index).padStart(4, '0'); // Generate a 4-digit code starting at 1000
+}
+
+// Function to flatten multi-line descriptions into a single line
+function flattenDescription(description) {
+    return description ? description.replace(/\r?\n|\r/g, " ").trim() : "";
+}
+
 function mapJsonToCsv(jsonData) {
     const columns = [
         "id", "id_type", "public_id", "public_id_actual_at", "member_id", "member_id_actual_at", "hash_id", "sn_member_id", "sn_hash_id", "r_member_id",
@@ -56,11 +75,12 @@ function mapJsonToCsv(jsonData) {
         if (index >= 10) return; // Limit to 10 organizations
         const idx = index + 1;
         csvRow[`organization_${idx}`] = work.name || "";
+        csvRow[`organization_id_${idx}`] = generateFourDigitCode(index); // Assign a 4-digit ID
         csvRow[`organization_title_${idx}`] = work.position || "";
-        csvRow[`organization_start_${idx}`] = work.startDate || "";
-        csvRow[`organization_end_${idx}`] = work.endDate || "";
+        csvRow[`organization_start_${idx}`] = formatDateString(work.startDate) || "";
+        csvRow[`organization_end_${idx}`] = formatDateString(work.endDate) || "";
         csvRow[`organization_location_${idx}`] = work.location || "";
-        csvRow[`position_description_${idx}`] = work.summary || "";
+        csvRow[`position_description_${idx}`] = flattenDescription(work.summary || ""); // Flatten description
     });
 
     // Education
@@ -70,8 +90,8 @@ function mapJsonToCsv(jsonData) {
         csvRow[`education_${idx}`] = edu.institution || "";
         csvRow[`education_degree_${idx}`] = edu.studyType || "";
         csvRow[`education_fos_${idx}`] = edu.area || "";
-        csvRow[`education_start_${idx}`] = edu.startDate || "";
-        csvRow[`education_end_${idx}`] = edu.endDate || "";
+        csvRow[`education_start_${idx}`] = formatDateString(edu.startDate) || "";
+        csvRow[`education_end_${idx}`] = formatDateString(edu.endDate) || "";
     });
 
     // Languages
@@ -90,37 +110,41 @@ function mapJsonToCsv(jsonData) {
     return [columns.join(","), ...rows].join("\n");
 }
 
-// Example usage
 document.addEventListener("DOMContentLoaded", () => {
     const convertButton = document.getElementById("convertButton");
     const downloadButton = document.getElementById("downloadButton");
     const jsonInput = document.getElementById("jsonInput");
 
+    console.log("DOM fully loaded and parsed");
+
     convertButton.addEventListener("click", () => {
+        console.log("Convert button clicked");
         try {
             const jsonData = JSON.parse(jsonInput.value);
-            const csvData = mapJsonToCsv(jsonData);
+            console.log("Parsed JSON:", jsonData);
 
-            // Update status badge
+            const csvData = mapJsonToCsv(jsonData);
+            console.log("Generated CSV:", csvData);
+
             const statusBadge = document.getElementById("statusBadge");
             statusBadge.textContent = "CSV successfully created!";
             statusBadge.classList.add("success");
 
-            downloadButton.dataset.csv = csvData; // Temporary storage for download
+            downloadButton.dataset.csv = csvData;
             downloadButton.disabled = false;
         } catch (error) {
             alert("Invalid JSON. Please check your input.");
-            console.error(error);
+            console.error("Error parsing JSON:", error);
         }
     });
 
     downloadButton.addEventListener("click", () => {
+        console.log("Download button clicked");
         try {
-            const csvData = downloadButton.dataset.csv; // Retrieve stored CSV data
+            const csvData = downloadButton.dataset.csv;
             const blob = new Blob([csvData], { type: "text/csv" });
             const downloadLink = document.createElement("a");
 
-            // Generate file name
             const jsonData = JSON.parse(jsonInput.value);
             const firstName = jsonData.basics?.name?.split(" ")[0]?.toLowerCase() || "unknown";
             const lastName = jsonData.basics?.name?.split(" ").slice(1).join("_").toLowerCase() || "user";
