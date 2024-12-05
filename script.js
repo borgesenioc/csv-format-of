@@ -30,7 +30,7 @@ function mapJsonToCsv(jsonData) {
         "t_hash_id", "avatar_id", "public_id_2", "lh_id", "profile_url", "email", "email_type", "full_name", "first_name", "last_name", "original_first_name",
         "original_last_name", "custom_first_name", "custom_last_name", "avatar", "headline", "mini_profile_actual_at", "location_name", "industry", "industry_actual_at",
         "summary", "address", "birthday", "badges_premium", "badges_influencer", "badges_job_seeker", "badges_open_link", "badges_hiring", "current_company",
-        "current_company_custom", "current_company_position", "current_company_custom_position", "current_company_actual_at", "current_company_industry",
+        "current_company_custom", "current_company_position", "current_company_custom_position", "current_company_actual_at", "current_company_industry"
     ];
 
     // Add dynamic organization, education, and language columns
@@ -66,9 +66,7 @@ function mapJsonToCsv(jsonData) {
     csvRow.avatar = jsonData.basics?.image || "";
     csvRow.headline = jsonData.basics?.label || "";
     csvRow.location_name = jsonData.basics?.location?.address || "";
-
-    // Summary (simplified to extract only the primary summary)
-    csvRow.summary = jsonData.basics?.summary || "";
+    csvRow.summary = flattenDescription(jsonData.basics?.summary || ""); // Flattened summary
 
     // Organizations
     (jsonData.work || []).forEach((work, index) => {
@@ -76,11 +74,13 @@ function mapJsonToCsv(jsonData) {
         const idx = index + 1;
         csvRow[`organization_${idx}`] = work.name || "";
         csvRow[`organization_id_${idx}`] = generateFourDigitCode(index); // Assign a 4-digit ID
+        csvRow[`organization_url_${idx}`] = `https://www.linkedin.com/company/${csvRow[`organization_id_${idx}`]}`;
         csvRow[`organization_title_${idx}`] = work.position || "";
         csvRow[`organization_start_${idx}`] = formatDateString(work.startDate) || "";
         csvRow[`organization_end_${idx}`] = formatDateString(work.endDate) || "";
         csvRow[`organization_location_${idx}`] = work.location || "";
-        csvRow[`position_description_${idx}`] = flattenDescription(work.summary || ""); // Flatten description
+        csvRow[`organization_description_${idx}`] = flattenDescription(work.summary || ""); // Flatten description
+        csvRow[`position_description_${idx}`] = flattenDescription(work.summary || ""); // Ensure description is included
     });
 
     // Education
@@ -92,6 +92,7 @@ function mapJsonToCsv(jsonData) {
         csvRow[`education_fos_${idx}`] = edu.area || "";
         csvRow[`education_start_${idx}`] = formatDateString(edu.startDate) || "";
         csvRow[`education_end_${idx}`] = formatDateString(edu.endDate) || "";
+        csvRow[`education_description_${idx}`] = flattenDescription(edu.description || ""); // Flattened description
     });
 
     // Languages
@@ -102,12 +103,13 @@ function mapJsonToCsv(jsonData) {
         csvRow[`language_proficiency_${idx}`] = lang.fluency || "";
     });
 
+    // Map languages and skills
     csvRow.languages = (jsonData.languages || []).map(lang => lang.language).join(", ");
-    csvRow.skills = (jsonData.skills || []).map(skill => `${skill.name} : ${skill.level || "null"}`).join(", ");
+    csvRow.skills = (jsonData.skills || []).map(skill => skill.name).join(", ");
 
-    // Map CSV fields and return result
-    const rows = [columns.map(col => escapeCsvField(csvRow[col] || "")).join(",")];
-    return [columns.join(","), ...rows].join("\n");
+    // Ensure all headers exist in the row
+    const row = columns.map(header => escapeCsvField(csvRow[header] || ""));
+    return [columns.join(","), row.join(",")].join("\n");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -115,22 +117,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const downloadButton = document.getElementById("downloadButton");
     const jsonInput = document.getElementById("jsonInput");
 
-    console.log("DOM fully loaded and parsed");
-
     convertButton.addEventListener("click", () => {
-        console.log("Convert button clicked");
         try {
             const jsonData = JSON.parse(jsonInput.value);
-            console.log("Parsed JSON:", jsonData);
-
             const csvData = mapJsonToCsv(jsonData);
-            console.log("Generated CSV:", csvData);
+            console.log("CSV Data generated:", csvData);
 
-            const statusBadge = document.getElementById("statusBadge");
-            statusBadge.textContent = "CSV successfully created!";
-            statusBadge.classList.add("success");
-
-            downloadButton.dataset.csv = csvData;
+            downloadButton.dataset.csv = csvData; // Store CSV data
             downloadButton.disabled = false;
         } catch (error) {
             alert("Invalid JSON. Please check your input.");
@@ -139,7 +132,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     downloadButton.addEventListener("click", () => {
-        console.log("Download button clicked");
         try {
             const csvData = downloadButton.dataset.csv;
             const blob = new Blob([csvData], { type: "text/csv" });
@@ -153,12 +145,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             downloadLink.href = URL.createObjectURL(blob);
             downloadLink.download = fileName;
+
             document.body.appendChild(downloadLink);
             downloadLink.click();
             document.body.removeChild(downloadLink);
         } catch (error) {
-            console.error("Error generating the file name:", error);
-            alert("Failed to generate the file name. Please try again.");
+            alert("Error downloading the CSV file. Make sure to generate it first.");
+            console.error("Download Error:", error);
         }
     });
 });
