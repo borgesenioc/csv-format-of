@@ -71,13 +71,15 @@ function mapJsonToCsv(jsonData) {
     (jsonData.work || []).forEach((work, index) => {
         if (index >= 10) return; // Limit to 10 organizations
         const idx = index + 1;
+        const description = flattenDescription(work.summary || ""); // Flattened description
         csvRow[`organization_${idx}`] = work.name || "";
         csvRow[`organization_id_${idx}`] = generateFourDigitCode(index); // Assign a 4-digit ID
+        csvRow[`organization_url_${idx}`] = `https://www.linkedin.com/company/${generateFourDigitCode(index)}`;
         csvRow[`organization_title_${idx}`] = work.position || "";
         csvRow[`organization_start_${idx}`] = formatDateString(work.startDate) || "";
         csvRow[`organization_end_${idx}`] = formatDateString(work.endDate) || "";
-        csvRow[`organization_location_${idx}`] = work.location || "";
-        csvRow[`position_description_${idx}`] = flattenDescription(work.summary || "");
+        csvRow[`organization_description_${idx}`] = description; // Same description
+        csvRow[`position_description_${idx}`] = description; // Same description
     });
 
     // Education
@@ -112,6 +114,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const downloadButton = document.getElementById("downloadButton");
     const jsonInput = document.getElementById("jsonInput");
 
+    // Disable download button initially
+    downloadButton.disabled = true;
+
     convertButton.addEventListener("click", () => {
         try {
             const jsonData = JSON.parse(jsonInput.value);
@@ -119,6 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             downloadButton.dataset.csv = csvData;
             downloadButton.disabled = false;
+            downloadButton.classList.add("enabled");
         } catch (error) {
             alert("Invalid JSON. Please check your input.");
             console.error("Error parsing JSON:", error);
@@ -144,6 +150,12 @@ document.addEventListener("DOMContentLoaded", () => {
             document.body.removeChild(downloadLink);
         } catch (error) {
             alert("Error downloading the CSV file.");
+            console.error("Error downloading the CSV file:", error);
         }
+    });
+
+    jsonInput.addEventListener("input", () => {
+        downloadButton.disabled = true;
+        downloadButton.classList.remove("enabled");
     });
 });

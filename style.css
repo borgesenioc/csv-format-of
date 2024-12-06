@@ -47,7 +47,7 @@ button {
   padding: 10px 20px;
   font-size: 1rem;
   color: white;
-  background-color: #3ba17c; /* Adjusted button color */
+  background-color: #043d99; /* Adjusted button color */
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -77,4 +77,16 @@ footer {
   font-size: 0.9rem;
   background-color: #2e8375; /* Footer color matches header */
   color: white;
+}
+
+button.enabled {
+  background-color: #28a745;
+  color: white;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
 }
