@@ -1,4 +1,3 @@
-
 # LinkedIn JSON to CSV Converter
 
 A simple web app that converts JSON data extracted from LinkedIn into a predefined CSV format. This tool makes it easy to process and analyze LinkedIn data by transforming it into a structured CSV file.
@@ -9,6 +8,14 @@ A simple web app that converts JSON data extracted from LinkedIn into a predefin
 - **Validation**: Ensures the JSON structure is correct and matches the predefined schema.
 - **CSV Output**: Converts JSON data into a downloadable CSV file.
 - **Preview**: Displays the generated CSV file in a preview area to ensure proper mapping.
+
+## Prerequisites
+
+This tool relies on the **JSON Resume Exporter** Chrome extension to extract LinkedIn data. Follow these steps to set it up:
+
+1. Install the extension from the [Chrome Web Store](https://chromewebstore.google.com/detail/json-resume-exporter/caobgmmcpklomkcckaenhjlokpmfbdec).
+2. Enable the extension and use it to export JSON data from LinkedIn profiles.
+3. Copy the extracted JSON and paste it into the app's input box.
 
 ## Live Demo
 
@@ -42,6 +49,26 @@ The generated CSV will include the following columns:
 - `skills`
 - And more (refer to `columns` in the source code for the complete list).
 
+## Workflow
+
+1. **Extract JSON from LinkedIn**:
+   - Use the JSON Resume Exporter extension to export data from LinkedIn profiles.
+   - Copy the exported JSON.
+
+2. **Convert JSON to CSV**:
+   - Paste the JSON into the app: [LinkedIn JSON to CSV Converter](https://<your-project-name>.vercel.app).
+   - Click **Convert to CSV** to generate the CSV file.
+   - Click **Download CSV** to save the file to your device.
+
+3. **Upload CSV to OnFrontiers**:
+   - Go to the [OnFrontiers Profile Uploader](https://app.onfrontiers.com/profile-uploader).
+   - Import the CSV file and merge it with the registered expert profile.
+
+4. **Add a Profile Picture** (optional):
+   - Visit the LinkedIn profile, right-click on the profile picture, and copy the image address.
+   - In OnFrontiers, navigate to the expert's profile and click **Upload Photo**.
+   - Select **Link (URL)**, paste the copied image address, and click **Save**.
+
 ## Local Development
 
 To run the app locally:
@@ -50,7 +77,7 @@ To run the app locally:
    ```bash
    git clone https://github.com/<your-username>/<repo-name>.git
    cd <repo-name>
-Install dependencies (if applicable):
+   Install dependencies (if applicable):
 
 bash
 Copy code
@@ -101,4 +128,8 @@ Enjoy converting your LinkedIn JSON data effortlessly!
 javascript
 Copy code
 
-Replace `<your-project-name>` and `<your-username>` with your actual project and GitHub details before saving.
+Replace `<your-project-name>` and `<your-username>` with your actual project and GitHub details.
+
+
+
+
