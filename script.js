@@ -2,10 +2,9 @@ function formatDateString(dateString) {
     if (!dateString) return ""; // Return an empty string if dateString is falsy
     const date = new Date(dateString);
     if (isNaN(date)) return dateString; // If the date is invalid, return the original string
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
+    return `${year}.${month}`; // Return in compact format (YYYY.MM)
 }
 
 // Helper function to escape fields for CSV
@@ -30,7 +29,7 @@ function mapJsonToCsv(jsonData) {
         "t_hash_id", "avatar_id", "public_id_2", "lh_id", "profile_url", "email", "email_type", "full_name", "first_name", "last_name", "original_first_name",
         "original_last_name", "custom_first_name", "custom_last_name", "avatar", "headline", "mini_profile_actual_at", "location_name", "industry", "industry_actual_at",
         "summary", "address", "birthday", "badges_premium", "badges_influencer", "badges_job_seeker", "badges_open_link", "badges_hiring", "current_company",
-        "current_company_custom", "current_company_position", "current_company_custom_position", "current_company_actual_at", "current_company_industry"
+        "current_company_custom", "current_company_position", "current_company_custom_position", "current_company_actual_at", "current_company_industry",
     ];
 
     // Add dynamic organization, education, and language columns
@@ -66,7 +65,7 @@ function mapJsonToCsv(jsonData) {
     csvRow.avatar = jsonData.basics?.image || "";
     csvRow.headline = jsonData.basics?.label || "";
     csvRow.location_name = jsonData.basics?.location?.address || "";
-    csvRow.summary = flattenDescription(jsonData.basics?.summary || ""); // Flattened summary
+    csvRow.summary = flattenDescription(jsonData.basics?.summary || "");
 
     // Organizations
     (jsonData.work || []).forEach((work, index) => {
@@ -74,13 +73,11 @@ function mapJsonToCsv(jsonData) {
         const idx = index + 1;
         csvRow[`organization_${idx}`] = work.name || "";
         csvRow[`organization_id_${idx}`] = generateFourDigitCode(index); // Assign a 4-digit ID
-        csvRow[`organization_url_${idx}`] = `https://www.linkedin.com/company/${csvRow[`organization_id_${idx}`]}`;
         csvRow[`organization_title_${idx}`] = work.position || "";
         csvRow[`organization_start_${idx}`] = formatDateString(work.startDate) || "";
         csvRow[`organization_end_${idx}`] = formatDateString(work.endDate) || "";
         csvRow[`organization_location_${idx}`] = work.location || "";
-        csvRow[`organization_description_${idx}`] = flattenDescription(work.summary || ""); // Flatten description
-        csvRow[`position_description_${idx}`] = flattenDescription(work.summary || ""); // Ensure description is included
+        csvRow[`position_description_${idx}`] = flattenDescription(work.summary || "");
     });
 
     // Education
@@ -92,7 +89,6 @@ function mapJsonToCsv(jsonData) {
         csvRow[`education_fos_${idx}`] = edu.area || "";
         csvRow[`education_start_${idx}`] = formatDateString(edu.startDate) || "";
         csvRow[`education_end_${idx}`] = formatDateString(edu.endDate) || "";
-        csvRow[`education_description_${idx}`] = flattenDescription(edu.description || ""); // Flattened description
     });
 
     // Languages
@@ -103,13 +99,12 @@ function mapJsonToCsv(jsonData) {
         csvRow[`language_proficiency_${idx}`] = lang.fluency || "";
     });
 
-    // Map languages and skills
     csvRow.languages = (jsonData.languages || []).map(lang => lang.language).join(", ");
-    csvRow.skills = (jsonData.skills || []).map(skill => skill.name).join(", ");
+    csvRow.skills = (jsonData.skills || []).map(skill => `${skill.name} : ${skill.level || "null"}`).join(", ");
 
-    // Ensure all headers exist in the row
-    const row = columns.map(header => escapeCsvField(csvRow[header] || ""));
-    return [columns.join(","), row.join(",")].join("\n");
+    // Map CSV fields and return result
+    const rows = [columns.map(col => escapeCsvField(csvRow[col] || "")).join(",")];
+    return [columns.join(","), ...rows].join("\n");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -121,9 +116,8 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const jsonData = JSON.parse(jsonInput.value);
             const csvData = mapJsonToCsv(jsonData);
-            console.log("CSV Data generated:", csvData);
 
-            downloadButton.dataset.csv = csvData; // Store CSV data
+            downloadButton.dataset.csv = csvData;
             downloadButton.disabled = false;
         } catch (error) {
             alert("Invalid JSON. Please check your input.");
@@ -145,13 +139,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             downloadLink.href = URL.createObjectURL(blob);
             downloadLink.download = fileName;
-
             document.body.appendChild(downloadLink);
             downloadLink.click();
             document.body.removeChild(downloadLink);
         } catch (error) {
-            alert("Error downloading the CSV file. Make sure to generate it first.");
-            console.error("Download Error:", error);
+            alert("Error downloading the CSV file.");
         }
     });
 });
