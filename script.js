@@ -110,106 +110,59 @@ function mapJsonToCsv(jsonData) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Profile 1 Elements
+    const profiles = [1, 2, 3, 4, 5]; // List of profile numbers
 
-    const convertButton = document.getElementById("convertButton");
-    const downloadButton = document.getElementById("downloadButton");
-    const jsonInput = document.getElementById("jsonInput");
+    profiles.forEach((profile) => {
+        const convertButton = document.getElementById(`convertButton${profile}`);
+        const downloadButton = document.getElementById(`downloadButton${profile}`);
+        const jsonInput = document.getElementById(`jsonInput${profile}`);
 
-    // Disable download button initially
-    downloadButton.disabled = true;
-
-    convertButton.addEventListener("click", () => {
-        try {
-            const jsonData = JSON.parse(jsonInput.value);
-            const csvData = mapJsonToCsv(jsonData);
-
-            downloadButton.dataset.csv = csvData;
-            downloadButton.disabled = false;
-            downloadButton.classList.add("enabled");
-        } catch (error) {
-            alert("Invalid JSON. Please check your input.");
-            console.error("Error parsing JSON:", error);
-        }
-    });
-
-    downloadButton.addEventListener("click", () => {
-        try {
-            const csvData = downloadButton.dataset.csv;
-            const blob = new Blob([csvData], { type: "text/csv" });
-            const downloadLink = document.createElement("a");
-
-            const jsonData = JSON.parse(jsonInput.value);
-            const firstName = jsonData.basics?.name?.split(" ")[0]?.toLowerCase() || "unknown";
-            const lastName = jsonData.basics?.name?.split(" ").slice(1).join("_").toLowerCase() || "user";
-            const currentDate = new Date().toISOString().split("T")[0].replace(/-/g, "_");
-            const fileName = `${firstName}_${lastName}_${currentDate}.csv`;
-
-            downloadLink.href = URL.createObjectURL(blob);
-            downloadLink.download = fileName;
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            document.body.removeChild(downloadLink);
-        } catch (error) {
-            alert("Error downloading the CSV file.");
-            console.error("Error downloading the CSV file:", error);
-        }
-    });
-
-    jsonInput.addEventListener("input", () => {
+        // Disable download button initially
         downloadButton.disabled = true;
-        downloadButton.classList.remove("enabled");
+
+        // Handle "Convert to CSV" button click for each profile
+        convertButton.addEventListener("click", () => {
+            try {
+                const jsonData = JSON.parse(jsonInput.value); // Parse JSON input for the profile
+                const csvData = mapJsonToCsv(jsonData); // Convert JSON to CSV
+
+                downloadButton.dataset.csv = csvData; // Store CSV in dataset
+                downloadButton.disabled = false; // Enable the download button
+                downloadButton.classList.add("enabled");
+            } catch (error) {
+                alert(`Invalid JSON for Profile ${profile}. Please check your input.`);
+                console.error(`Error parsing JSON for Profile ${profile}:`, error);
+            }
+        });
+
+        // Handle "Download CSV" button click for each profile
+        downloadButton.addEventListener("click", () => {
+            try {
+                const csvData = downloadButton.dataset.csv;
+                const blob = new Blob([csvData], { type: "text/csv" });
+                const downloadLink = document.createElement("a");
+
+                const jsonData = JSON.parse(jsonInput.value);
+                const firstName = jsonData.basics?.name?.split(" ")[0]?.toLowerCase() || "unknown";
+                const lastName = jsonData.basics?.name?.split(" ").slice(1).join("_").toLowerCase() || "user";
+                const currentDate = new Date().toISOString().split("T")[0].replace(/-/g, "_");
+                const fileName = `${firstName}_${lastName}_${currentDate}_profile${profile}.csv`;
+
+                downloadLink.href = URL.createObjectURL(blob);
+                downloadLink.download = fileName;
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+            } catch (error) {
+                alert(`Error downloading the CSV file for Profile ${profile}.`);
+                console.error(`Error downloading CSV for Profile ${profile}:`, error);
+            }
+        });
+
+        // Handle changes to the JSON input for each profile
+        jsonInput.addEventListener("input", () => {
+            downloadButton.disabled = true;
+            downloadButton.classList.remove("enabled");
+        });
     });
-// Profile 2 Elements
-const convertButton2 = document.getElementById("convertButton2");
-const downloadButton2 = document.getElementById("downloadButton2");
-const jsonInput2 = document.getElementById("jsonInput2");
-
-// Disable Profile 2's download button initially
-downloadButton2.disabled = true;
-
-convertButton2.addEventListener("click", () => {
-    try {
-        const jsonData = JSON.parse(jsonInput2.value);
-        const csvData = mapJsonToCsv(jsonData);
-
-        downloadButton2.dataset.csv = csvData;
-        downloadButton2.disabled = false;
-        downloadButton2.classList.add("enabled");
-    } catch (error) {
-        alert("Invalid JSON for Profile 2. Please check your input.");
-        console.error("Error parsing JSON for Profile 2:", error);
-    }
-});
-
-downloadButton2.addEventListener("click", () => {
-    try {
-        const csvData = downloadButton2.dataset.csv;
-        const blob = new Blob([csvData], { type: "text/csv" });
-        const downloadLink = document.createElement("a");
-
-        const jsonData = JSON.parse(jsonInput2.value);
-        const firstName = jsonData.basics?.name?.split(" ")[0]?.toLowerCase() || "unknown";
-        const lastName = jsonData.basics?.name?.split(" ").slice(1).join("_").toLowerCase() || "user";
-        const currentDate = new Date().toISOString().split("T")[0].replace(/-/g, "_");
-        const fileName = `${firstName}_${lastName}_${currentDate}_profile2.csv`;
-
-        downloadLink.href = URL.createObjectURL(blob);
-        downloadLink.download = fileName;
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-    } catch (error) {
-        alert("Error downloading the CSV file for Profile 2.");
-        console.error("Error downloading CSV for Profile 2:", error);
-    }
-});
-
-jsonInput2.addEventListener("input", () => {
-    downloadButton2.disabled = true;
-    downloadButton2.classList.remove("enabled");
-});
-
-
-
 });
