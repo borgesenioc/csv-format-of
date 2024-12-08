@@ -27,7 +27,7 @@ main {
 
 .input-section textarea {
   width: 95%; /* Made narrower */
-  height: 350px; /* Increased height */
+  height: 100px; /* Increased height */
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
