@@ -1,61 +1,49 @@
+let allProfilesCsv = []; // Array to hold CSV rows for all profiles
+
 function formatDateString(dateString) {
-    if (!dateString) return ""; // Return an empty string if dateString is falsy
+    if (!dateString) return "";
     const date = new Date(dateString);
-    if (isNaN(date)) return dateString; // If the date is invalid, return the original string
+    if (isNaN(date)) return dateString;
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
-    return `${year}.${month}`; // Return in compact format (YYYY.MM)
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    return `${year}.${month}`;
 }
 
-// Helper function to escape fields for CSV
 function escapeCsvField(field) {
-    if (!field) return ""; // Return an empty string if the field is undefined or null
-    return `"${String(field).replace(/"/g, '""')}"`; // Escape double quotes and wrap in quotes
+    if (!field) return "";
+    return `"${String(field).replace(/"/g, '""')}"`;
 }
 
-// Generate a 4-digit code for organization IDs
 function generateFourDigitCode(index) {
-    return String(1000 + index).padStart(4, '0'); // Generate a 4-digit code starting at 1000
+    return String(1000 + index).padStart(4, "0");
 }
 
-// Function to flatten multi-line descriptions into a single line
 function flattenDescription(description) {
     return description ? description.replace(/\r?\n|\r/g, " ").trim() : "";
 }
 
 function mapJsonToCsv(jsonData) {
     const columns = [
-        "id", "id_type", "public_id", "public_id_actual_at", "member_id", "member_id_actual_at", "hash_id", "sn_member_id", "sn_hash_id", "r_member_id",
-        "t_hash_id", "avatar_id", "public_id_2", "lh_id", "profile_url", "email", "email_type", "full_name", "first_name", "last_name", "original_first_name",
-        "original_last_name", "custom_first_name", "custom_last_name", "avatar", "headline", "mini_profile_actual_at", "location_name", "industry", "industry_actual_at",
-        "summary", "address", "birthday", "badges_premium", "badges_influencer", "badges_job_seeker", "badges_open_link", "badges_hiring", "current_company",
-        "current_company_custom", "current_company_position", "current_company_custom_position", "current_company_actual_at", "current_company_industry",
+        "id", "id_type", "public_id", "profile_url", "email", "full_name", "first_name", "last_name",
+        "avatar", "headline", "location_name", "summary",
+        ...Array.from({ length: 10 }, (_, i) => [
+            `organization_${i + 1}`, `organization_id_${i + 1}`, `organization_url_${i + 1}`,
+            `organization_title_${i + 1}`, `organization_start_${i + 1}`, `organization_end_${i + 1}`,
+            `organization_description_${i + 1}`, `position_description_${i + 1}`
+        ]).flat(),
+        ...Array.from({ length: 3 }, (_, i) => [
+            `education_${i + 1}`, `education_degree_${i + 1}`, `education_fos_${i + 1}`,
+            `education_start_${i + 1}`, `education_end_${i + 1}`
+        ]).flat(),
+        ...Array.from({ length: 3 }, (_, i) => [`language_${i + 1}`, `language_proficiency_${i + 1}`]).flat(),
+        "languages", "skills"
     ];
-
-    // Add dynamic organization, education, and language columns
-    for (let i = 1; i <= 10; i++) {
-        columns.push(
-            `organization_${i}`, `organization_id_${i}`, `organization_url_${i}`, `organization_title_${i}`,
-            `organization_start_${i}`, `organization_end_${i}`, `organization_description_${i}`, `organization_location_${i}`,
-            `organization_website_${i}`, `organization_domain_${i}`, `position_description_${i}`
-        );
-    }
-    for (let i = 1; i <= 3; i++) {
-        columns.push(
-            `education_${i}`, `education_degree_${i}`, `education_fos_${i}`, `education_start_${i}`,
-            `education_end_${i}`, `education_description_${i}`
-        );
-    }
-    for (let i = 1; i <= 3; i++) {
-        columns.push(`language_${i}`, `language_proficiency_${i}`);
-    }
-
-    columns.push("languages", "skills");
 
     const csvRow = {};
 
     // Basic Information
     csvRow.id = jsonData.basics?.profiles?.[0]?.username || "";
+    csvRow.id_type = ""; // Define logic if available, else keep empty
     csvRow.public_id = jsonData.basics?.profiles?.[0]?.username || "";
     csvRow.profile_url = jsonData.basics?.profiles?.[0]?.url || "";
     csvRow.email = jsonData.basics?.email || "";
@@ -69,22 +57,21 @@ function mapJsonToCsv(jsonData) {
 
     // Organizations
     (jsonData.work || []).forEach((work, index) => {
-        if (index >= 10) return; // Limit to 10 organizations
+        if (index >= 10) return;
         const idx = index + 1;
-        const description = flattenDescription(work.summary || ""); // Flattened description
         csvRow[`organization_${idx}`] = work.name || "";
-        csvRow[`organization_id_${idx}`] = generateFourDigitCode(index); // Assign a 4-digit ID
-        csvRow[`organization_url_${idx}`] = `https://www.linkedin.com/company/${generateFourDigitCode(index)}`;
+        csvRow[`organization_id_${idx}`] = generateFourDigitCode(index);
+        csvRow[`organization_url_${idx}`] = work.url || "";
         csvRow[`organization_title_${idx}`] = work.position || "";
         csvRow[`organization_start_${idx}`] = formatDateString(work.startDate) || "";
         csvRow[`organization_end_${idx}`] = formatDateString(work.endDate) || "";
-        csvRow[`organization_description_${idx}`] = description; // Same description
-        csvRow[`position_description_${idx}`] = description; // Same description
+        csvRow[`organization_description_${idx}`] = flattenDescription(work.summary || "");
+        csvRow[`position_description_${idx}`] = flattenDescription(work.summary || "");
     });
 
     // Education
     (jsonData.education || []).forEach((edu, index) => {
-        if (index >= 3) return; // Limit to 3 education entries
+        if (index >= 3) return;
         const idx = index + 1;
         csvRow[`education_${idx}`] = edu.institution || "";
         csvRow[`education_degree_${idx}`] = edu.studyType || "";
@@ -95,79 +82,80 @@ function mapJsonToCsv(jsonData) {
 
     // Languages
     (jsonData.languages || []).forEach((lang, index) => {
-        if (index >= 3) return; // Limit to 3 languages
+        if (index >= 3) return;
         const idx = index + 1;
         csvRow[`language_${idx}`] = lang.language || "";
         csvRow[`language_proficiency_${idx}`] = lang.fluency || "";
     });
 
     csvRow.languages = (jsonData.languages || []).map(lang => lang.language).join(", ");
-    csvRow.skills = (jsonData.skills || []).map(skill => `${skill.name} : ${skill.level || "null"}`).join(", ");
+    csvRow.skills = (jsonData.skills || []).map(skill => skill.name).join(", ");
 
-    // Map CSV fields and return result
-    const rows = [columns.map(col => escapeCsvField(csvRow[col] || "")).join(",")];
-    return [columns.join(","), ...rows].join("\n");
+    // Explicitly map columns to values in csvRow
+    const row = columns.map(col => escapeCsvField(csvRow[col] || "")).join(",");
+
+    return [columns.join(","), row];
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const profiles = [1, 2, 3, 4, 5]; // List of profile numbers
+    const profiles = [1, 2, 3, 4, 5];
+    const downloadAllButton = document.getElementById("downloadAllButton");
 
-    profiles.forEach((profile) => {
+    profiles.forEach(profile => {
         const convertButton = document.getElementById(`convertButton${profile}`);
-        const downloadButton = document.getElementById(`downloadButton${profile}`);
         const jsonInput = document.getElementById(`jsonInput${profile}`);
-        const inputContainer = document.getElementById(`inputContainer${profile}`);
         const successMessage = document.getElementById(`successMessage${profile}`);
 
-        // Disable download button initially
-        downloadButton.disabled = true;
-
-        // Handle "Convert to CSV" button click for each profile
         convertButton.addEventListener("click", () => {
             try {
-                const jsonData = JSON.parse(jsonInput.value); // Parse JSON input for the profile
-                const csvData = mapJsonToCsv(jsonData); // Convert JSON to CSV
-
-                downloadButton.dataset.csv = csvData; // Store CSV in dataset
-                downloadButton.disabled = false; // Enable the download button
-                downloadButton.classList.add("enabled");
-                // After successful conversion:
-                inputContainer.style.display = "none"; // Hide the input container
-                successMessage.classList.remove("hidden"); // Show the success message
+                const jsonData = JSON.parse(jsonInput.value);
+                const [headers, csvRow] = mapJsonToCsv(jsonData);
+        
+                if (allProfilesCsv.length === 0) {
+                    allProfilesCsv.push(headers); // Add headers only once
+                }
+                allProfilesCsv.push(csvRow); // Add data row
+        
+                successMessage.textContent = `Profile ${profile} added to the combined CSV.`;
+                successMessage.classList.remove("hidden");
+        
+                // Hide the input container after successful addition
+                const inputContainer = document.getElementById(`inputContainer${profile}`);
+                inputContainer.style.display = "none";
+        
+                downloadAllButton.disabled = false; // Enable the main download button
             } catch (error) {
                 alert(`Invalid JSON for Profile ${profile}. Please check your input.`);
                 console.error(`Error parsing JSON for Profile ${profile}:`, error);
             }
         });
+    });
 
-        // Handle "Download CSV" button click for each profile
-        downloadButton.addEventListener("click", () => {
-            try {
-                const csvData = downloadButton.dataset.csv;
-                const blob = new Blob([csvData], { type: "text/csv" });
-                const downloadLink = document.createElement("a");
-
-                const jsonData = JSON.parse(jsonInput.value);
-                const firstName = jsonData.basics?.name?.split(" ")[0]?.toLowerCase() || "unknown";
-                const lastName = jsonData.basics?.name?.split(" ").slice(1).join("_").toLowerCase() || "user";
-                const currentDate = new Date().toISOString().split("T")[0].replace(/-/g, "_");
-                const fileName = `${firstName}_${lastName}_${currentDate}_profile${profile}.csv`;
-
-                downloadLink.href = URL.createObjectURL(blob);
-                downloadLink.download = fileName;
-                document.body.appendChild(downloadLink);
-                downloadLink.click();
-                document.body.removeChild(downloadLink);
-            } catch (error) {
-                alert(`Error downloading the CSV file for Profile ${profile}.`);
-                console.error(`Error downloading CSV for Profile ${profile}:`, error);
-            }
-        });
-
-        // Handle changes to the JSON input for each profile
-        jsonInput.addEventListener("input", () => {
-            downloadButton.disabled = true;
-            downloadButton.classList.remove("enabled");
-        });
+    downloadAllButton.addEventListener("click", () => {
+        if (allProfilesCsv.length <= 1) {
+            alert("No profiles added to download.");
+            return;
+        }
+    
+        const csvContent = allProfilesCsv.join("\n");
+    
+        const blob = new Blob([csvContent], { type: "text/csv" });
+        const downloadLink = document.createElement("a");
+    
+        const profileCount = allProfilesCsv.length - 1; // Exclude header from count
+        const now = new Date();
+        const datePart = now.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
+            .toLowerCase()
+            .replace(/,/, "")
+            .replace(/ /g, "_");
+        const timePart = `${now.getHours()}h_${now.getMinutes()}m`;
+        const fileName = `${profileCount}_profiles_${datePart}_${timePart}.csv`;
+    
+        downloadLink.href = URL.createObjectURL(blob);
+        downloadLink.download = fileName;
+    
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
     });
 });
