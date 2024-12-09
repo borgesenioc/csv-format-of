@@ -8,10 +8,11 @@ body {
 }
 
 header {
-  background-color: #2e8375; /* Adjusted to a greenish-blue */
-  color: white;
+  background-color: #b1c4c0; /* Adjusted to a greenish-blue */
+  color: rgb(12, 12, 12);
   padding: 20px 0;
   text-align: center;
+  font-size: 1.5rem;
 }
 
 h1 {
@@ -26,8 +27,8 @@ main {
 }
 
 .input-section textarea {
-  width: 95%; /* Made narrower */
-  height: 20px; /* Increased height */
+  width: 95%;
+  height: 20px; /* Consistent height */
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -51,10 +52,16 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover {
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 button:disabled {
-  background-color: #9dc3ae;
+  background-color: #e0e0e0; /* Light gray for disabled buttons */
+  color: #9e9e9e; /* More contrast for disabled text */
   cursor: not-allowed;
 }
 
@@ -69,12 +76,14 @@ button:disabled {
 .badge.success {
   background-color: #3ba17c; /* Adjusted to greenish-blue for success */
   color: white;
+  padding: 15px; /* Larger padding for success badge */
+  font-size: 1.1rem; /* Slightly larger font */
 }
 
 footer {
   text-align: center;
-  padding: 20px 0;
-  font-size: 0.9rem;
+  padding: 15px;
+  font-size: 1.2rem; /* Responsive font size */
   background-color: #2e8375; /* Footer color matches header */
   color: white;
 }
@@ -93,4 +102,22 @@ button:disabled {
 
 .hidden {
   display: none;
+}
+
+#downloadAllButton {
+  display: block;
+  margin: 20px auto; /* Centers the button horizontally */
+  padding: 15px 25px; /* Makes the button larger */
+  font-size: 18px; /* Increases font size */
+  background-color: #03a353; /* Primary color for the button */
+  color: #fff; /* White text */
+  border: none; /* Removes border */
+  border-radius: 5px; /* Adds slight rounding to the corners */
+  cursor: pointer; /* Changes cursor to pointer on hover */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+}
+
+#downloadAllButton:hover {
+  background-color: #027e40; /* Darker shade on hover */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Hover shadow effect */
 }
