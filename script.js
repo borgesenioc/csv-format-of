@@ -116,6 +116,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const convertButton = document.getElementById(`convertButton${profile}`);
         const downloadButton = document.getElementById(`downloadButton${profile}`);
         const jsonInput = document.getElementById(`jsonInput${profile}`);
+        const inputContainer = document.getElementById(`inputContainer${profile}`);
+        const successMessage = document.getElementById(`successMessage${profile}`);
 
         // Disable download button initially
         downloadButton.disabled = true;
@@ -129,6 +131,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 downloadButton.dataset.csv = csvData; // Store CSV in dataset
                 downloadButton.disabled = false; // Enable the download button
                 downloadButton.classList.add("enabled");
+                // After successful conversion:
+                inputContainer.style.display = "none"; // Hide the input container
+                successMessage.classList.remove("hidden"); // Show the success message
             } catch (error) {
                 alert(`Invalid JSON for Profile ${profile}. Please check your input.`);
                 console.error(`Error parsing JSON for Profile ${profile}:`, error);
